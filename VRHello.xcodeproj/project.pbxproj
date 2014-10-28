@@ -62,7 +62,7 @@
 		733A0D7D19FECF3500144084 /* vertex.vsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vertex.vsl; path = shaders/vertex.vsl; sourceTree = "<group>"; };
 		739B093519F870BF002B5A71 /* VRHello */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VRHello; sourceTree = BUILT_PRODUCTS_DIR; };
 		739B093819F870BF002B5A71 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		739B094219F87192002B5A71 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../libLeap.dylib; sourceTree = "<group>"; };
+		739B094219F87192002B5A71 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
 		739B094519F871B8002B5A71 /* Leap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
 		739B094619F871B8002B5A71 /* LeapMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
 		739B094719F876F8002B5A71 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
