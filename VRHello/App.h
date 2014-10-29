@@ -1,16 +1,16 @@
-//==============================================================================
-/*
-	Primary application class
+#ifdef __APPLE__
+  #include <OpenGL/gl.h>
+  #include <OpenGL/OpenGL.h>
+#elif _WIN32
+  #define GLEW_STATIC
+  #include <GL/glew.h>
+  #include "windows.h"
+#else
+  #include <GL/glew.h>
+#endif
 
-	3/11/2014
-    SDLTutorials.com
-    Tim Jones
-*/
-//==============================================================================
 #include "Log.h"
 #include <SDL.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/OpenGL.h>
 #include "Leap.h"
 #include "LeapMath.h"
 #include "util.h"
@@ -47,20 +47,10 @@ class App {
         
 	private:
 		App();
-
-		// Capture SDL Events
 		void onEvent(SDL_Event* event);
-
-		// Initialize our SDL game / app
 		bool init();
-
-		// Logic loop
 		void update();
-
-		// Render loop (draw)
 		void render();
-
-		// Free up resources
 		void cleanup();
 
 	public:
