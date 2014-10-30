@@ -10,7 +10,7 @@
 #endif
 
 #include "Log.h"
-#include <SDL.h>
+#include "SDL.h"
 #include "Leap.h"
 #include "LeapMath.h"
 #include "util.h"
