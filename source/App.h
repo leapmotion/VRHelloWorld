@@ -3,10 +3,10 @@
   #include <OpenGL/OpenGL.h>
 #elif _WIN32
   #define GLEW_STATIC
-  #include <GL/glew.h>
   #include "windows.h"
-#else
   #include <GL/glew.h>
+#else
+  #include <GL/gl.h>
 #endif
 
 #include "Log.h"
@@ -26,24 +26,21 @@ class App {
 	private:
 		static App instance;
 
-		bool isRunning = true;
+		bool isRunning;
 
-		SDL_Window* window = NULL;
-		SDL_Renderer* renderer = NULL;
-        SDL_GLContext glContext = NULL;
-
-		int windowWidth = 1024;
-		int windowHeight = 768;
+		SDL_Window* window;
+		SDL_Renderer* renderer;
+        SDL_GLContext glContext;
 
         Leap::Controller controller;
-        GLuint rawLeftTexture = 0;
-        GLuint rawRightTexture = 0;
-        GLuint distortionLeftTexture = 0;
-        GLuint distortionRightTexture = 0;
+        GLuint rawLeftTexture;
+        GLuint rawRightTexture;
+        GLuint distortionLeftTexture;
+        GLuint distortionRightTexture;
 
-        Leap::Matrix cameraMatrix = Leap::Matrix(Leap::Vector::zAxis(), 0, Leap::Vector(0, 0, -4.0));
-
-        bool showLeftImage = false;
+        bool showLeftImage;
+		int windowWidth;
+		int windowHeight;
         
 	private:
 		App();

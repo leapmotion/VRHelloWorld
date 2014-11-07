@@ -8,9 +8,18 @@
 
 #ifndef __VRHello__util__
 #define __VRHello__util__
+#ifdef __APPLE__
+  #include <OpenGL/gl.h>
+  #include <OpenGL/OpenGL.h>
+#elif _WIN32
+  #define GLEW_STATIC
+  #include "windows.h"
+  #include <GL/glew.h>
+#else
+  #include <GL/gl.h>
+#endif
 
 #include <stdio.h>
-#include <OpenGL/gl.h>
 #include <iostream>
 #include <fstream>
 #include <cerrno>
@@ -22,7 +31,7 @@ GLuint createTextureReference();
 void printProgramInfoLog(GLuint obj);
 void printShaderInfoLog(GLuint obj);
 std::string getFileContents(std::string filename);
-GLfloat* createPerspectiveMatrix(float fov, float aspect, float near, float far);
-void setPerspectiveFrustrum(GLdouble fovY, GLdouble aspect, GLdouble near, GLdouble far);
+GLfloat* createPerspectiveMatrix(float fov, float aspect, float nearPlane, float farPlane);
+void setPerspectiveFrustrum(GLdouble fovY, GLdouble aspect, GLdouble nearPlane, GLdouble farPlane);
 
 #endif /* defined(__VRHello__util__) */

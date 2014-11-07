@@ -1,11 +1,15 @@
 //==============================================================================
 #include "App.h"
-#include <OpenGL/glu.h>
 
 App App::instance;
 GLuint vertShader, fragShader, program;
 
-App::App() {}
+App::App() {
+	isRunning = true;
+	showLeftImage = false;
+	windowWidth = 1024;
+	windowHeight = 768;
+}
 
 using namespace Leap;
 
@@ -77,7 +81,7 @@ bool App::init() {
 
 //------------------------------------------------------------------------------
 int App::execute(int argc, char* argv[]) {
-	if(!init()) return 0;
+	if(!init()) return 10;
 	SDL_Event event;
 
 	while(isRunning) {

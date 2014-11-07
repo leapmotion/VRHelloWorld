@@ -10,50 +10,59 @@
 
 GLuint createProgram(std::string vertexFile, std::string fragmentFile)
 {
-    std::string vertex = getFileContents(vertexFile);
-    std::string fragment = getFileContents(fragmentFile);
+	try{
+		std::string vertex = getFileContents(vertexFile);
+		std::string fragment = getFileContents(fragmentFile);
 
-    GLint program = glCreateProgram();
+		GLint program = glCreateProgram();
 
-    GLint compileSuccess;
+		GLint compileSuccess;
 
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    const GLchar *vsource = (const GLchar *)vertex.c_str();
+		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+		const GLchar *vsource = (const GLchar *)vertex.c_str();
 
-    glShaderSource(vertexShader, 1, &vsource, NULL);
-    glCompileShader(vertexShader);
+		glShaderSource(vertexShader, 1, &vsource, NULL);
+		glCompileShader(vertexShader);
 
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &compileSuccess);
-    if (compileSuccess == GL_FALSE) {
-        printf("Problem compiling vertex shader\n");
-        printShaderInfoLog(vertexShader);
-    }
-    glAttachShader(program, vertexShader);
+		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &compileSuccess);
+		if (compileSuccess == GL_FALSE) {
+			printf("Problem compiling vertex shader\n");
+			printShaderInfoLog(vertexShader);
+		}
+		glAttachShader(program, vertexShader);
 
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    const GLchar *fsource = (const GLchar *)fragment.c_str();
+		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+		const GLchar *fsource = (const GLchar *)fragment.c_str();
 
-    glShaderSource(fragmentShader, 1, &fsource, NULL);
-    glCompileShader(fragmentShader);
+		glShaderSource(fragmentShader, 1, &fsource, NULL);
+		glCompileShader(fragmentShader);
 
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &compileSuccess);
-    if (compileSuccess == GL_FALSE) {
-        printf("Problem compiling fragment shader\n");
-        printShaderInfoLog(fragmentShader);
-    }
+		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &compileSuccess);
+		if (compileSuccess == GL_FALSE) {
+			printf("Problem compiling fragment shader\n");
+			printShaderInfoLog(fragmentShader);
+		}
 
-    glAttachShader(program, fragmentShader);
+		glAttachShader(program, fragmentShader);
     
-    glLinkProgram(program);
-    glGetProgramiv(program, GL_COMPILE_STATUS, &compileSuccess);
-    if (compileSuccess == GL_FALSE) {
-        printf("Problem linking program\n");
-        printProgramInfoLog(vertexShader);
-        exit(1);
-    }
+		glLinkProgram(program);
+		glGetProgramiv(program, GL_COMPILE_STATUS, &compileSuccess);
+		if (compileSuccess == GL_FALSE) {
+			printf("Problem linking program\n");
+			printProgramInfoLog(vertexShader);
+			exit(111);
+		}
 
+		return program;
+	} catch (const std::exception& ex) {
+		printf("std::Exception:");
+	} catch (const std::string& ex) {
+		printf("std::string Exception:");
+	} catch (...) {
+		printf("Generic Exception.");
+	} 
 
-    return program;
+	return -1;
 }
 
 GLuint createTextureReference()
@@ -104,7 +113,8 @@ void printProgramInfoLog(GLuint obj)
 
 std::string getFileContents(std::string filename)
 {
-  std::ifstream in(filename);
+  std::ifstream in; 
+  in.open("Debug\\" + filename);
   if (in)
   {
     std::string contents;
@@ -119,11 +129,11 @@ std::string getFileContents(std::string filename)
     std::cout << "Error: " << errno << std::endl;
   }
   std::cout << "Couldn't open " << filename << std::endl;
-  exit(1);
+  exit(21);
 }
 
 GLfloat* createPerspectiveMatrix(float fov, float aspect,
-    float near, float far)
+    float nearPlane, float farPlane)
 {
     GLfloat* m = new GLfloat[16];
 
@@ -132,18 +142,18 @@ GLfloat* createPerspectiveMatrix(float fov, float aspect,
 
     m[0] = f / aspect;
     m[5] = f;
-    m[10] = (far + near) / (near - far);
+    m[10] = (farPlane + nearPlane) / (nearPlane - farPlane);
     m[11] = -1.0f;
-    m[14] = (2.0f * far*near) / (near - far);
+    m[14] = (2.0f * farPlane*nearPlane) / (nearPlane - farPlane);
 
     return m;
 }
 
-void setPerspectiveFrustrum(GLdouble fovY, GLdouble aspect, GLdouble near, GLdouble far)
+void setPerspectiveFrustrum(GLdouble fovY, GLdouble aspect, GLdouble nearPlane, GLdouble farPlane)
 {
     const GLdouble pi = 3.1415926535897932384626433832795;
     GLdouble fW, fH;
-    fH = tan( fovY / 360 * pi ) * near;
+    fH = tan( fovY / 360 * pi ) * nearPlane;
     fW = fH * aspect;
-    glFrustum( -fW, fW, -fH, fH, near, far );
+    glFrustum( -fW, fW, -fH, fH, nearPlane, farPlane );
 }
