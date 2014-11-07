@@ -49,8 +49,9 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LEAP_SDK)\lib\x86;C:\Users\jward\programming\VR\VRHelloWorld\external\glew-1.11.0\lib\Release\Win32;C:\Users\jward\programming\VR\VRHelloWorld\external\SDL2-Win\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;OpenGL32.lib;Leap.lib;glew32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;OpenGL32.lib;Leap.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
+      <IgnoreSpecificDefaultLibraries>LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /yr "$(projectdir)..\..\external/SDL2-Win\lib\x86\SDL2.dll" "$(TargetDir)"

@@ -16,7 +16,8 @@ using namespace Leap;
 //------------------------------------------------------------------------------
 bool App::init() {
     //Enable Leap Motion images and optimize controller for HMD use
-    controller.setPolicyFlags(static_cast<Controller::PolicyFlag>(Controller::PolicyFlag::POLICY_IMAGES | Controller::PolicyFlag::POLICY_OPTIMIZE_HMD));
+    //controller.setPolicyFlags(static_cast<Controller::PolicyFlag>(Controller::PolicyFlag::POLICY_IMAGES | Controller::PolicyFlag::POLICY_OPTIMIZE_HMD));
+	controller.setPolicyFlags(Controller::POLICY_IMAGES);
 
     //SDL setup
     if(SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -50,10 +51,19 @@ bool App::init() {
 
     SDL_GL_MakeCurrent(window, glContext);
 
-    Log("gl_renderer: %s", glGetString(GL_RENDERER));
+	Log("gl_renderer: %s", glGetString(GL_RENDERER));
     Log("gl_version: %s", glGetString(GL_VERSION));
     Log("glsl_version: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
+
+	//Glew setup
+	GLint GlewInitResults = glewInit();
+	if (GLEW_OK != GlewInitResults) 
+	{
+		printf("ERROR: %s\n",glewGetErrorString(GlewInitResults));
+		exit(EXIT_FAILURE);
+	}
+	
     //Scene setup
 
     //Create the shader program
@@ -96,15 +106,19 @@ int App::execute(int argc, char* argv[]) {
 
 //------------------------------------------------------------------------------
 void App::update() {
+	controller.setPolicyFlags(Controller::POLICY_IMAGES);
+
     Frame frame = controller.frame();
     if (frame.isValid()) {
         //Update image and distortion textures
         Image left = frame.images()[0];
+		Log("Count: %d in %d", frame.images().count(), frame.id());
         if (left.width() > 0) {
                 glBindTexture(GL_TEXTURE_2D, rawLeftTexture);
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, left.width(), left.height(), 0, GL_RED, GL_UNSIGNED_BYTE, left.data());
                 glBindTexture(GL_TEXTURE_2D, distortionLeftTexture);
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RG, left.distortionWidth()/2, left.distortionHeight(), 0, GL_RG, GL_FLOAT, left.distortion());
+				Log("Left");
         }
         Image right = frame.images()[1];
         if (right.width() > 0) {
@@ -112,6 +126,7 @@ void App::update() {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, right.width(), right.height(), 0, GL_RED, GL_UNSIGNED_BYTE, right.data());
                 glBindTexture(GL_TEXTURE_2D, distortionRightTexture);
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RG, right.distortionWidth()/2, right.distortionHeight(), 0, GL_RG, GL_FLOAT, right.distortion());
+				Log("Right");
         }
     }
 
@@ -131,7 +146,7 @@ void App::render() {
     glScalef(80.0, 80.0, 1.0);
     glTranslatef(0.0, 0.0, -10.0);
 
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
+    glClearColor(1.0f, 0.0f, 1.0f, 1.0f );
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glEnable(GL_TEXTURE_2D);
@@ -156,7 +171,8 @@ void App::render() {
     glEnd(); // Done Drawing The Quad
     glPopMatrix();
 
-    SDL_RenderPresent(renderer);
+   SDL_RenderPresent(renderer);
+    SDL_GL_SwapWindow(window);
 }
 
 //------------------------------------------------------------------------------
