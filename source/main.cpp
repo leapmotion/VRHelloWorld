@@ -8,11 +8,11 @@
 
 #include "App.h"
 #include <SDL.h>
-#include <direct.h>
+//#include <direct.h>
 
 int main(int argc, char* argv[]) {
 	char currentPath[FILENAME_MAX];
-	printf("CWD: %s", _getcwd(currentPath, sizeof(currentPath)));
+	//printf("CWD: %s", _getcwd(currentPath, sizeof(currentPath)));
     return App::getInstance()->execute(argc, argv);
 }
 

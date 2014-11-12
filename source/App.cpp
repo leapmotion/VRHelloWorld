@@ -55,7 +55,7 @@ bool App::init() {
     Log("gl_version: %s", glGetString(GL_VERSION));
     Log("glsl_version: %s", glGetString(GL_SHADING_LANGUAGE_VERSION));
 
-
+#ifdef WIN32
 	//Glew setup
 	GLint GlewInitResults = glewInit();
 	if (GLEW_OK != GlewInitResults) 
@@ -63,7 +63,8 @@ bool App::init() {
 		printf("ERROR: %s\n",glewGetErrorString(GlewInitResults));
 		exit(EXIT_FAILURE);
 	}
-	
+#endif
+
     //Scene setup
 
     //Create the shader program
@@ -112,13 +113,11 @@ void App::update() {
     if (frame.isValid()) {
         //Update image and distortion textures
         Image left = frame.images()[0];
-		Log("Count: %d in %d", frame.images().count(), frame.id());
         if (left.width() > 0) {
                 glBindTexture(GL_TEXTURE_2D, rawLeftTexture);
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, left.width(), left.height(), 0, GL_RED, GL_UNSIGNED_BYTE, left.data());
                 glBindTexture(GL_TEXTURE_2D, distortionLeftTexture);
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RG, left.distortionWidth()/2, left.distortionHeight(), 0, GL_RG, GL_FLOAT, left.distortion());
-				Log("Left");
         }
         Image right = frame.images()[1];
         if (right.width() > 0) {
@@ -126,7 +125,6 @@ void App::update() {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, right.width(), right.height(), 0, GL_RED, GL_UNSIGNED_BYTE, right.data());
                 glBindTexture(GL_TEXTURE_2D, distortionRightTexture);
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RG, right.distortionWidth()/2, right.distortionHeight(), 0, GL_RG, GL_FLOAT, right.distortion());
-				Log("Right");
         }
     }
 
@@ -171,8 +169,8 @@ void App::render() {
     glEnd(); // Done Drawing The Quad
     glPopMatrix();
 
-   SDL_RenderPresent(renderer);
-    SDL_GL_SwapWindow(window);
+   //SDL_RenderPresent(renderer);
+   SDL_GL_SwapWindow(window);
 }
 
 //------------------------------------------------------------------------------

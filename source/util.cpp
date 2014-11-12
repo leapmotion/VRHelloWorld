@@ -114,7 +114,9 @@ void printProgramInfoLog(GLuint obj)
 std::string getFileContents(std::string filename)
 {
   std::ifstream in; 
-  in.open("Debug\\" + filename);
+  //in.open("Debug\\" + filename);
+  in.open(filename);
+
   if (in)
   {
     std::string contents;
