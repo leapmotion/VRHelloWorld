@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		73123D0C19F963B3006C9DAE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73123D0B19F963B3006C9DAE /* OpenGL.framework */; };
+		7370905E1A2FF99D0038CBDE /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7370905D1A2FF99D0038CBDE /* libLeap.dylib */; };
+		7370905F1A2FF9C50038CBDE /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7370905D1A2FF99D0038CBDE /* libLeap.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		73BC98381A13231D00C4EDC2 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73BC98341A13231D00C4EDC2 /* App.cpp */; };
 		73BC98391A13231D00C4EDC2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73BC98371A13231D00C4EDC2 /* main.cpp */; };
-		73BC983F1A13238200C4EDC2 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 73BC983E1A13238200C4EDC2 /* libLeap.dylib */; };
 		73BC98411A13239500C4EDC2 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73BC98401A13239500C4EDC2 /* SDL2.framework */; };
 		73BC98441A13258A00C4EDC2 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73BC98421A13258A00C4EDC2 /* util.cpp */; };
 		73BC98451A1325B700C4EDC2 /* fragment.fsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 73BC983A1A13233800C4EDC2 /* fragment.fsl */; };
 		73BC98461A1325C900C4EDC2 /* vertex.vsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 73BC983B1A13233800C4EDC2 /* vertex.vsl */; };
-		73BC98471A13262F00C4EDC2 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 73BC983E1A13238200C4EDC2 /* libLeap.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		73BC98481A13263600C4EDC2 /* SDL2.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 73BC98401A13239500C4EDC2 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				73BC98471A13262F00C4EDC2 /* libLeap.dylib in CopyFiles */,
+				7370905F1A2FF9C50038CBDE /* libLeap.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		73123D0B19F963B3006C9DAE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		7370905D1A2FF99D0038CBDE /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../external/LeapSDK/lib/libLeap.dylib; sourceTree = "<group>"; };
 		739B093519F870BF002B5A71 /* VRHello */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VRHello; sourceTree = BUILT_PRODUCTS_DIR; };
 		73BC98341A13231D00C4EDC2 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = App.cpp; path = source/App.cpp; sourceTree = SOURCE_ROOT; };
 		73BC98351A13231D00C4EDC2 /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = App.h; path = source/App.h; sourceTree = SOURCE_ROOT; };
@@ -64,7 +65,6 @@
 		73BC983B1A13233800C4EDC2 /* vertex.vsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vertex.vsl; path = source/shaders/vertex.vsl; sourceTree = SOURCE_ROOT; };
 		73BC983C1A13235D00C4EDC2 /* Leap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Leap.h; path = source/Leap.h; sourceTree = SOURCE_ROOT; };
 		73BC983D1A13235D00C4EDC2 /* LeapMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LeapMath.h; path = source/LeapMath.h; sourceTree = SOURCE_ROOT; };
-		73BC983E1A13238200C4EDC2 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = "external/LeapSDK/lib/libc++/libLeap.dylib"; sourceTree = "<group>"; };
 		73BC98401A13239500C4EDC2 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = external/SDL2.framework; sourceTree = "<group>"; };
 		73BC98421A13258A00C4EDC2 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = source/util.cpp; sourceTree = SOURCE_ROOT; };
 		73BC98431A13258A00C4EDC2 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = source/util.h; sourceTree = SOURCE_ROOT; };
@@ -75,8 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7370905E1A2FF99D0038CBDE /* libLeap.dylib in Frameworks */,
 				73BC98411A13239500C4EDC2 /* SDL2.framework in Frameworks */,
-				73BC983F1A13238200C4EDC2 /* libLeap.dylib in Frameworks */,
 				73123D0C19F963B3006C9DAE /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				73BC98401A13239500C4EDC2 /* SDL2.framework */,
-				73BC983E1A13238200C4EDC2 /* libLeap.dylib */,
 				73123D0B19F963B3006C9DAE /* OpenGL.framework */,
 			);
 			name = Frameworks;
@@ -140,6 +139,7 @@
 			children = (
 				73BC983C1A13235D00C4EDC2 /* Leap.h */,
 				73BC983D1A13235D00C4EDC2 /* LeapMath.h */,
+				7370905D1A2FF99D0038CBDE /* libLeap.dylib */,
 			);
 			name = LeapSDK;
 			path = VRHello;
@@ -308,6 +308,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/external/LeapSDK/lib/libc++",
+					"$(PROJECT_DIR)/external/LeapSDK/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -335,6 +336,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/external/LeapSDK/lib/libc++",
+					"$(PROJECT_DIR)/external/LeapSDK/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
